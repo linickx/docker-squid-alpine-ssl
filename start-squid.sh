@@ -9,12 +9,18 @@ SQUID=$(/usr/bin/which squid)
 "$CHOWN" -R squid:squid /var/cache/squid
 "$CHOWN" -R squid:squid /var/log/squid
 
+# Clean SSL Squid DB
+echo "Initializing SSL DB..."
+rm -rf /var/lib/ssl_db
+/usr/lib/squid/ssl_crtd -c -s /var/lib/ssl_db
+
 # Prepare the cache using Squid.
 echo "Initializing cache..."
 "$SQUID" -z
 
 # Give the Squid cache some time to rebuild.
 sleep 5
+
 
 # Launch squid
 echo "Starting Squid..."

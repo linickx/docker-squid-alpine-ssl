@@ -1,10 +1,10 @@
-FROM alpine:3.2
+FROM alpine
 
-MAINTAINER chrisdaish@gmail.com
+MAINTAINER Nick [linickx.com]
 
 RUN apk update \
-    && apk add squid=3.5.4-r2 \
-    && apk add curl \
+    && apk add squid \
+    && apk add curl ca-certificates libressl\
     && rm -rf /var/cache/apk/*
 
 COPY start-squid.sh /usr/local/bin/
